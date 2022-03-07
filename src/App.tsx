@@ -1,4 +1,5 @@
 import React from "react";
+import Nav from "./Components/Nav"
 import {
   HashRouter as Router,
   Routes,
@@ -18,17 +19,7 @@ const Main = styled.div`
   flex-grow:1;
 `;
 
-const Nav=styled.nav`
-  border:1px solid blue;
-  >ul{
-    display:flex;
-    >li{
-      width:33.33333%;
-      text-align:center;
-      padding:16px
-    }
-  }
-`
+
 
 function App() {
   return (
@@ -43,22 +34,7 @@ function App() {
             <Route path="*" element={<NoMatch />}></Route>
           </Routes>
         </Main>
-        <Nav>
-          <ul>
-            <li>
-              <Link to="/tags">标签页</Link>
-            </li>
-            <li>
-              <Link to="/money">记账页</Link>
-            </li>
-            <li>
-              <Link to="/statistic">统计页</Link>
-            </li>
-          </ul>
-        </Nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+        <Nav />
       </Wrapper>
     </Router>
   );
