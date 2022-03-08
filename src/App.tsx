@@ -1,13 +1,9 @@
 import React from "react";
-import Nav from "./Components/Nav"
 import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
+  HashRouter as Router, Navigate, Route, Routes
 } from "react-router-dom";
 import styled from "styled-components";
+import Nav from "./Components/Nav";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -18,8 +14,6 @@ const Wrapper = styled.div`
 const Main = styled.div`
   flex-grow:1;
 `;
-
-
 
 function App() {
   return (
