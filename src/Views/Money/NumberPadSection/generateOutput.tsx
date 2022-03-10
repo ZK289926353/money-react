@@ -1,5 +1,4 @@
 const generateOutput = (text: string, output = "0") => {
-    console.log(text);
   switch (text) {
     case "0":
     case "1":
