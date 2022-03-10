@@ -18,8 +18,8 @@ const Wrapper = styled.section`
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
-      &.selected{
-          background:#f60;
+      &.selected {
+        background: #f60;
       }
     }
   }
@@ -33,39 +33,44 @@ const Wrapper = styled.section`
   }
 `;
 
-const TagsSection: React.FC = () => {
-    const [tags,setTags]=React.useState<string[]>(['衣','食','住','行']);
-    const [selectedTags,setSelectedTags]=React.useState<string[]>([]);
-    const onAddTags=()=>{
-        const tagName=window.prompt('输入新增的标签');
-        if(tagName!==null){
-        setTags([...tags, tagName]);
-        }
-    };
-    const onToggleTags=(tag:string)=>{
-        const index=selectedTags.indexOf(tag);
-        if(index>=0){
-            setSelectedTags(selectedTags.filter(t=>t!==tag));
-        }else{
-            setSelectedTags([...selectedTags,tag]);
-        }
-    };
-    const getClass=(tags:string)=>
-        selectedTags.indexOf(tags)>=0?`selected`:``;
-    
-    return (
-      <Wrapper>
-        <ol>
-            {tags.map(tag => 
-                <li key={tag} onClick={()=>onToggleTags(tag)}
-                className={getClass(tag)}
-                >{tag}</li>
-            )}
-        </ol>
-        <button onClick={onAddTags}>新增标签</button>
-      </Wrapper>
-    );
+type Props = { value: string[]; onChange: (selected:string[]) => void };
+
+const TagsSection: React.FC<Props> = (props) => {
+  const [tags, setTags] = React.useState<string[]>(["衣", "食", "住", "行"]);
+  const selectedTags = props.value;
+  const onAddTags = () => {
+    const tagName = window.prompt("输入新增的标签");
+    if (tagName !== null) {
+      setTags([...tags, tagName]);
+    }
   };
+  const onToggleTags = (tag: string) => {
+    const index = selectedTags.indexOf(tag);
+    if (index >= 0) {
+      props.onChange(selectedTags.filter((t) => t !== tag));
+    } else {
+      props.onChange([...selectedTags, tag]);
+    }
+  };
+  const getClass = (tags: string) =>
+    selectedTags.indexOf(tags) >= 0 ? `selected` : ``;
+
+  return (
+    <Wrapper>
+      <ol>
+        {tags.map((tag) => (
+          <li
+            key={tag}
+            onClick={() => onToggleTags(tag)}
+            className={getClass(tag)}
+          >
+            {tag}
+          </li>
+        ))}
+      </ol>
+      <button onClick={onAddTags}>新增标签</button>
+    </Wrapper>
+  );
+};
 
 export { TagsSection };
-
