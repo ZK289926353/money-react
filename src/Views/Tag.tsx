@@ -13,23 +13,23 @@ type Params = {
   id: string;
 };
 
-const Topbar=styled.header`
-display:flex;
-justify-content:space-between;
-align-items:center;
-line-height:20px;
-padding:14px;
-background:white;
+const Topbar = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 20px;
+  padding: 14px;
+  background: white;
 `;
-const InputWrapper=styled.div`
-  background:white;
-  padding:0 16px;
-  margin-top:8px;
-`
-const Tag: React.FC = (props) => {
-  const { findTag } = useTags();
-  let { id } = useParams<Params>();
-  const tag = findTag(parseInt(id ? id : `1`));
+const InputWrapper = styled.div`
+  background: white;
+  padding: 0 16px;
+  margin-top: 8px;
+`;
+const Tag: React.FC = () => {
+  const { findTag, updateTag } = useTags();
+  let { id:idString } = useParams<Params>();
+  const tag = findTag(parseInt(idString?idString:'null'));
   return (
     <Layout>
       <Topbar>
@@ -38,7 +38,14 @@ const Tag: React.FC = (props) => {
         <Icon />
       </Topbar>
       <InputWrapper>
-        <Input label="标签名" type="text" placeholder={tag.name}></Input>
+        <Input
+          label="标签名"
+          type="text"
+          value={tag.name}
+          onChange={(e) => {
+            updateTag(tag.id, { name: e.target.value });
+          }}
+        />
       </InputWrapper>
       <Center>
         <Space />
