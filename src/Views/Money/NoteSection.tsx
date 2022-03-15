@@ -2,9 +2,9 @@ import { Input } from "Components/Input";
 import React, { ChangeEventHandler } from "react";
 import styled from "styled-components";
 
-const _NoteSection = styled.section`
+const Wrapper = styled.section`
   background: #f5f5f5;
-  padding: 0px 16px;
+  padding: 14px 16px;
   font-size: 14px;
 `;
 
@@ -19,7 +19,7 @@ const NoteSection: React.FC<Props> = (props) => {
     props.onChange(e.target.value);
   };
   return (
-    <_NoteSection>
+    <Wrapper>
       <Input
         label="备注"
         type="text"
@@ -27,7 +27,7 @@ const NoteSection: React.FC<Props> = (props) => {
         value={note}
         onChange={onChange}
       ></Input>
-    </_NoteSection>
+    </Wrapper>
   );
 };
 
