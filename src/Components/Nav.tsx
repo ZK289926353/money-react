@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Icon from "./Icon";
 
 const NavWrapper = styled.nav`
-  background:white;
+  background: white;
   line-height: 24px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   > ul {
@@ -37,8 +37,8 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <NavLink
-            to="/tags"
+          <NavLink end
+            to="/tags" 
             className={({ isActive }) => (isActive ? "selected" : undefined)}
           >
             <Icon name="tag" />
