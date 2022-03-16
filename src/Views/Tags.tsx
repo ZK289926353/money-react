@@ -5,7 +5,7 @@ import Layout from "Components/Layout";
 import { Space } from "Components/Space";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useTags } from "useTags";
+import { useTags } from "hooks/useTags";
 
 const TagList = styled.ol`
   font-size: 16px;
