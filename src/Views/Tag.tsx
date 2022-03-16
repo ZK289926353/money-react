@@ -1,6 +1,6 @@
 import React from "react";
 import { useTags } from "useTags";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "Components/Layout";
 import Icon from "Components/Icon";
 import { Button } from "Components/Button";
@@ -38,7 +38,7 @@ const Tag: React.FC = () => {
           type="text"
           value={tag.name}
           onChange={(e) => {
-            updateTag(tag.id, {name:e.target.value});
+            updateTag(tag.id, { name: e.target.value });
           }}
         />
       </InputWrapper>
@@ -50,10 +50,14 @@ const Tag: React.FC = () => {
       </Center>
     </div>
   );
+  const navigate = useNavigate();
+  const onClickBack = () => {
+    navigate("/tags");
+  };
   return (
     <Layout>
       <Topbar>
-        <Icon name="left" />
+        <Icon name="left" onClick={onClickBack} />
         <span>编辑标签</span>
         <Icon />
       </Topbar>
