@@ -1,16 +1,24 @@
+import { useUpdate } from "hooks/useUpdate";
 import { createId } from "lib/createId";
-import React from "react";
-
-const defaultTags = [
-  { id: createId(), name: "衣" },
-  { id: createId(), name: "食" },
-  { id: createId(), name: "住" },
-  { id: createId(), name: "行" },
-];
+import React, { useEffect } from "react";
 
 const useTags = () => {
-  const [tags, setTags] =
-    React.useState<{ id: number; name: string }[]>(defaultTags);
+  const [tags, setTags] = React.useState<{ id: number; name: string }[]>([]);
+  useEffect(() => {
+    let localTags = JSON.parse(window.localStorage.getItem("tags") || "[]");
+    if (localTags.length === 0) {
+      localTags = [
+        { id: createId(), name: "衣" },
+        { id: createId(), name: "食" },
+        { id: createId(), name: "住" },
+        { id: createId(), name: "行" },
+      ];
+    }
+    setTags(localTags);
+  }, []);
+  useUpdate(() => {
+    window.localStorage.setItem("tags", JSON.stringify(tags));
+  }, [tags]);
   const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0];
   const findTagIndex = (id: number) => {
     let result = -1;
@@ -22,13 +30,6 @@ const useTags = () => {
     return result;
   };
   const updateTag = (id: number, obj: { name: string }) => {
-    // // 获取修改tag的下标
-    // const index = findTagIndex(id);
-    // // 深拷贝
-    // const tagsClone = JSON.parse(JSON.stringify(tags));
-    // // 把tagsClone的第index个删掉，换成{id:id,name:obj.name}
-    // tagsClone.splice(index, 1, { id: id, name: obj.name });
-    // setTags(tagsClone);
     setTags(
       tags.map((tag) => (tag.id === id ? { id: id, name: obj.name } : tag))
     );
@@ -36,7 +37,21 @@ const useTags = () => {
   const deleteTag = (id: number) => {
     setTags(tags.filter((tag) => tag.id !== id));
   };
-  return { tags, setTags, findTag, findTagIndex, updateTag, deleteTag };
+  const addTags = () => {
+    const tagName = window.prompt("输入新增的标签");
+    if (tagName !== null && tagName !== "") {
+      setTags([...tags, { id: createId(), name: tagName }]);
+    }
+  };
+  return {
+    tags,
+    setTags,
+    findTag,
+    findTagIndex,
+    updateTag,
+    deleteTag,
+    addTags,
+  };
 };
 
 export { useTags };

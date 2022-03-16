@@ -24,7 +24,7 @@ const TagList = styled.ol`
 `;
 
 function Tags() {
-  const { tags } = useTags();
+  const { tags,addTags } = useTags();
   return (
     <Layout>
       <TagList>
@@ -32,7 +32,7 @@ function Tags() {
           <li key={tag.id}>
             <Link to={"/tags/" + tag.id}>
               <span className="oneLine">
-                {tag.id}:{tag.name}
+                {tag.name}
               </span>
               <Icon name="right" />
             </Link>
@@ -43,7 +43,7 @@ function Tags() {
         <Space />
         <Space />
         <Space />
-        <Button>新增标签</Button>
+        <Button onClick={addTags}>新增标签</Button>
       </Center>
     </Layout>
   );
