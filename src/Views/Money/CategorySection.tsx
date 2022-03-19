@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const _CategorySection = styled.section`
+const Wrapper = styled.section`
   font-size: 24px;
   > ul {
     display: flex;
@@ -32,7 +32,7 @@ const CategorySection: React.FC<Props> = (props) => {
   type Y= keyof typeof categoryMap;
   const [categoryList] = useState<Y[]>(['-', '+']);
   return (
-    <_CategorySection>
+    <Wrapper>
       <ul>
         {categoryList.map((c) => (
           <li key={c}
@@ -42,7 +42,7 @@ const CategorySection: React.FC<Props> = (props) => {
           </li>
         ))}
       </ul>
-    </_CategorySection>
+    </Wrapper>
   );
 };
 
